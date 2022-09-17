@@ -1,0 +1,1 @@
+Future Reinforcement Anticipator with Scale Invariant Emulated Recall
