@@ -27,8 +27,10 @@ class mem_matrix(torch.nn.Module):
         self.A = A
         self.S = S
         self.M = torch.FloatTensor().new_zeros((len(S),len(A),nf,nf))
-    def time_update(dt, f_IN: torch.tensor, ctx: torch.FloatTensor):
-        for idx, s in enumerate(self.S):
+    def time_update(f_IN: np.array, ctx: torch.FloatTensor):
+        for s_idx, s in enumerate(self.S):
+            for a_idx, a in enumerate (self.A):
+                f_bind = f_in + s * np.dot(self.M[s_idx,a_idx],) - 
             self.M[idx,:] += np.outer(f_IN, ctx)
             
 class context(torch.nn.Module):
@@ -37,7 +39,7 @@ class context(torch.nn.Module):
         self.S = S
         self.F_pre = torch.FloatTensor().new_zeros(len(self.S), nf)
         self.F_post = torch.FloatTensor().new_zeros(len(self.S), nf)
-    def time_update(dt, f_IN: torch.tensor):
+    def time_update(f_IN: np.array):
         for idx, s in enumerate(self.S):
             self.F_pre = self.F_post
             self.F_post += - s*self.F_post + f_IN
@@ -47,7 +49,10 @@ class transition(torch.nn.Module):
         super(transition, self).__init__()
         self.S = S
         self.P = torch.FloatTensor().new_zeros(len(self.S), nf)
-    def time_update(dt, P_IN: torch.FloatTensor):
+    def prob_input(M=torch.FloatTensor, f_IN):
+        for s_idx, s in enumerate(self.S):
+            
+    def time_update():
         for idx, s in enumerate(self.S):
-            self.P[idx] += s*self.P[idx] + P_IN[idx] - self.P[-1]
+            self.P[idx] += s*self.P[idx] + self.P_IN[idx] - self.P[-1]
     
