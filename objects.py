@@ -62,10 +62,20 @@ class transition(torch.nn.Module):
         super(transition, self).__init__()
         self.S = S
         self.P = torch.FloatTensor().new_zeros(len(self.S), nf)
+        self.P_IN = torch.FloatTensor().new_zeros(len(self.S), nf)
     def prob_input(f_IN: np.array, M=torch.FloatTensor):
         for idx, s in enumerate(self.S):
             self.P_IN[idx] = np.dot(M[idx], f_IN)
-    def time_update():
+    def time_update(f_IN: np.array):
         for idx, s in enumerate(self.S):
             self.P[idx] += s*self.P[idx] + self.P_IN[idx] - self.P[-1]
+            for i_idx, i in enumerate(P[idx]):
+                if i >= 1:
+                    #process f_IN
+                    predicted_IN = np.zeros(len(f_IN))
+                    predicted_IN[i_idx] = 1
+                    if predicted_IN == f_IN:
+                        print("Predicted Input!")
+                    else:
+                        print("Not stimulus!")
     
