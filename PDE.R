@@ -117,3 +117,4 @@ for(time in times){
 plot(NewF,exp(-maxt*Svals), type="p", pch=19, col=rgb(0.5,0.5,1.0,0.5))
 # to compare the two
 abline(0,1)
+write.csv(NewF, file = "R_generated_F.csv")
