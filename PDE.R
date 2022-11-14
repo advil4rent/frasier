@@ -134,7 +134,7 @@ evolvefig <- function(){
 }	
 
 stepbackandforth <- function(starttime =TIMEFAC*min(1/Svals),
-			     delt=DELTFRAC * min(1/Svals), nsteps=10,
+			     delt=DELTFRAC * min(1/Svals), nsteps=50,
 			     forward = T 
 			     ){
 	StartF <- exp(-starttime * Svals)
